@@ -32,6 +32,9 @@
     ]
   }
   </script>
+  <style>
+    .ai-support{position:fixed;right:22px;bottom:22px;z-index:9990;font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif}.ai-support__toggle{display:inline-flex;align-items:center;gap:9px;min-height:50px;padding:0 15px;border:1px solid color-mix(in srgb,var(--line) 88%,var(--accent));border-radius:999px;background:var(--surface);color:var(--text);box-shadow:0 18px 48px rgba(15,23,42,.18);font-weight:800;font-size:13px;cursor:pointer}.ai-support__toggle:hover{transform:translateY(-1px);box-shadow:0 22px 58px rgba(15,23,42,.22)}.ai-support__spark{width:27px;height:27px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(145deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 8px 20px rgba(49,92,244,.24)}.ai-support__badge{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 0 5px var(--success-soft)}.ai-support__panel{width:min(370px,calc(100vw - 28px));margin-bottom:10px;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:0 28px 80px rgba(15,23,42,.2);overflow:hidden}.ai-support__panel[hidden]{display:none}.ai-support__head{display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--surface) 90%,var(--accent-soft))}.ai-support__title{display:flex;gap:10px;align-items:center}.ai-support__title strong{display:block;font-size:14px}.ai-support__title small{display:block;color:var(--muted);font-size:11px;margin-top:1px}.ai-support__close{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--text);cursor:pointer}.ai-support__body{padding:15px}.ai-support__intro{margin:0 0 11px;color:var(--text-2);font-size:12px;line-height:1.5}.ai-support__goal{width:100%;min-height:92px;resize:vertical;border:1px solid var(--line);border-radius:13px;background:var(--bg);color:var(--text);padding:11px 12px;font:inherit;font-size:13px;outline:none}.ai-support__goal:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}.ai-support__actions{display:flex;align-items:center;gap:8px;margin-top:10px}.ai-support__generate{flex:1;min-height:42px;border:0;border-radius:11px;background:var(--accent);color:#fff;font-weight:800;font-size:12px;cursor:pointer}.ai-support__generate:disabled{opacity:.55;cursor:not-allowed}.ai-support__status{min-height:18px;margin-top:7px;color:var(--muted);font-size:11px}.ai-support__result{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:var(--bg);padding:12px}.ai-support__result[hidden]{display:none}.ai-support__eyebrow{font-family:"Geist Mono",ui-monospace,monospace;font-size:9px;letter-spacing:.12em;color:var(--accent);font-weight:700}.ai-support__result h3{font-size:17px;line-height:1.15;letter-spacing:-.025em;margin:6px 0 8px}.ai-support__priority{padding:9px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--line);margin-bottom:9px}.ai-support__priority span{display:block;font-family:"Geist Mono",monospace;font-size:8px;letter-spacing:.11em;color:var(--muted);font-weight:700}.ai-support__priority b{display:block;font-size:12px;margin-top:3px}.ai-support__steps{display:grid;gap:6px}.ai-support__step{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start}.ai-support__step i{width:24px;height:24px;display:grid;place-items:center;border-radius:7px;background:var(--accent-soft);color:var(--accent);font-style:normal;font-size:9px;font-weight:900}.ai-support__step b{font-size:11px;line-height:1.4}.ai-support__meta{display:flex;justify-content:space-between;gap:10px;margin-top:10px;padding-top:9px;border-top:1px solid var(--line);color:var(--muted);font-size:9px}.ai-support__meta strong{color:var(--success)}@media(max-width:640px){.ai-support{right:14px;bottom:14px}.ai-support__toggle{min-height:46px;padding:0 12px}.ai-support__toggle span:last-child{display:none}.ai-support__panel{width:min(390px,calc(100vw - 28px))}}@media(prefers-reduced-motion:reduce){.ai-support__toggle{transition:none}.ai-support__toggle:hover{transform:none}}
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -179,6 +182,67 @@
 
   <div class="command-palette" id="commandPalette" hidden role="dialog" aria-modal="true" aria-labelledby="commandTitle"><div class="command-backdrop" data-close-command></div><div class="command-card"><div class="command-search"><span>⌕</span><input id="commandInput" type="text" placeholder="Type a command…" autocomplete="off"><kbd>ESC</kbd></div><div class="command-heading" id="commandTitle">Quick actions</div><div class="command-list" id="commandList"><button type="button" data-command-action="task"><span>✓</span><b>Create task</b><kbd>↵</kbd></button><button type="button" data-command-action="ai"><span>✦</span><b>Ask AI</b><kbd>↵</kbd></button><button type="button" data-command-action="planner"><span>◫</span><b>Open planner</b><kbd>⌘ P</kbd></button><button type="button" data-command-action="analytics"><span>◌</span><b>View analytics</b><kbd>⌘ A</kbd></button><button type="button" data-command-action="focus"><span>◉</span><b>Start focus session</b><kbd>⌘ F</kbd></button></div><div class="command-footer"><span>↑↓ navigate</span><span>Enter select</span><span>Esc close</span></div></div></div>
 
+  <aside class="ai-support" id="aiSupport" aria-label="FlowPilot AI support">
+    <section class="ai-support__panel" id="aiSupportPanel" hidden role="dialog" aria-modal="false" aria-labelledby="aiSupportTitle">
+      <header class="ai-support__head">
+        <div class="ai-support__title"><span class="ai-support__spark" aria-hidden="true">✦</span><div><strong id="aiSupportTitle">FlowPilot AI</strong><small>Symbolic execution copilot</small></div></div>
+        <button class="ai-support__close" id="aiSupportClose" type="button" aria-label="Close FlowPilot AI support">×</button>
+      </header>
+      <div class="ai-support__body">
+        <p class="ai-support__intro">Tell me what you want to accomplish. I’ll turn it into a practical next step using FlowPilot’s deterministic planning engine.</p>
+        <label class="sr-only" for="aiSupportGoal">Your goal</label>
+        <textarea class="ai-support__goal" id="aiSupportGoal" maxlength="240" placeholder="Example: Ship my portfolio website by Friday."></textarea>
+        <div class="ai-support__actions"><button class="ai-support__generate" id="aiSupportGenerate" type="button">Generate plan →</button></div>
+        <div class="ai-support__status" id="aiSupportStatus" aria-live="polite"></div>
+        <div class="ai-support__result" id="aiSupportResult" hidden aria-live="polite" aria-atomic="true"></div>
+      </div>
+    </section>
+    <button class="ai-support__toggle" id="aiSupportToggle" type="button" aria-expanded="false" aria-controls="aiSupportPanel"><span class="ai-support__spark" aria-hidden="true">✦</span><span>Ask FlowPilot AI</span><span class="ai-support__badge" aria-hidden="true"></span></button>
+  </aside>
+
+  <script src="ai-service.js" defer></script>
   <script src="app.js" defer></script>
+  <script>
+    (() => {
+      const init = () => {
+        const toggle = document.querySelector('#aiSupportToggle');
+        const panel = document.querySelector('#aiSupportPanel');
+        const close = document.querySelector('#aiSupportClose');
+        const goal = document.querySelector('#aiSupportGoal');
+        const generate = document.querySelector('#aiSupportGenerate');
+        const status = document.querySelector('#aiSupportStatus');
+        const result = document.querySelector('#aiSupportResult');
+        if (!toggle || !panel || !goal || !generate || !window.FlowPilotSymbolicAI) return;
+
+        const esc = (value) => String(value).replace(/[&<>\"]/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[char]));
+        const open = () => { panel.hidden = false; toggle.setAttribute('aria-expanded', 'true'); goal.focus(); };
+        const shut = () => { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); };
+
+        toggle.addEventListener('click', () => panel.hidden ? open() : shut());
+        close?.addEventListener('click', shut);
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !panel.hidden) shut(); });
+
+        generate.addEventListener('click', () => {
+          generate.disabled = true;
+          status.textContent = 'Mapping intent…';
+          window.setTimeout(() => {
+            const plan = window.FlowPilotSymbolicAI.generatePlan(goal.value);
+            if (!plan.ok) {
+              result.hidden = false;
+              result.innerHTML = `<div class="ai-support__eyebrow">CHECK THE INPUT</div><h3>One more detail.</h3><p>${esc(plan.error)}</p>`;
+              status.textContent = '';
+              generate.disabled = false;
+              return;
+            }
+            result.hidden = false;
+            result.innerHTML = `<div class="ai-support__eyebrow">${esc(plan.label)}</div><h3>${esc(plan.priority)}</h3><div class="ai-support__priority"><span>NEXT BEST ACTION</span><b>${esc(plan.steps[0])}</b></div><div class="ai-support__steps">${plan.steps.slice(1).map((step,index) => `<div class="ai-support__step"><i>${String(index + 2).padStart(2,'0')}</i><b>${esc(step)}</b></div>`).join('')}</div><div class="ai-support__meta"><span>${esc(plan.estimate)} · ${esc(plan.generatedAt)}</span><strong>${plan.confidence}% match</strong></div>`;
+            status.textContent = 'Plan generated locally — no external model call.';
+            generate.disabled = false;
+          }, 260);
+        });
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
+    })();
+  </script>
 </body>
 </html>
