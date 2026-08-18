@@ -1,0 +1,41 @@
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check JavaScript syntax
+        run: node --check app.js
+
+      - name: Verify required site files
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f app.js
+          test -f favicon.svg
+          test -f og-cover.svg
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f site.webmanifest
+          test -f vercel.json
+
+      - name: Verify key metadata
+        run: |
+          grep -q 'FlowPilot AI' index.html
+          grep -q 'application/ld+json' index.html
+          grep -q 'Skip to content' index.html
+          grep -q 'prefers-reduced-motion' styles.css
+
+      - name: Validate JSON files
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('vercel.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('site.webmanifest','utf8'))"
